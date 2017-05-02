@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ClockMVC</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <script src="Model/TClock.js"></script>
+    <script src="View/TClockViewDOM.js"></script>
+    <script src="View/TClockViewSVG.js"></script>
+    <script src="View/TClockViewCanvas.js"></script>
+    <script src="Controller/TClockControllerButtons.js"></script>
+</head>
+<body>
+<table>
+    <tr>
+        <td>
+            <div class="clockDom">
+                <input type="button" class="button start" value="Старт">
+                <input type="button" class="button stop" value="Стоп">
+                <span class="info"></span>
+                <div class="clock-face">
+                    <div class="clock-electronic">
+                        <span class="hour">00</span>:<span class="min">00</span>:<span class="sec">00</span>
+                    </div>
+                    <div class="clock-arrow-hour"></div>
+                    <div class="clock-arrow-min"></div>
+                    <div class="clock-arrow-sec"></div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="clockSVG">
+                <input type="button" class="button start" value="Старт">
+                <input type="button" class="button stop" value="Стоп">
+                <span class="info"></span>
+                <svg width=500 height=500 style="display: block" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <style><![CDATA[
+                        .clock-face {
+                            fill: #e1bc19;
+                            text-align: center;
+                        }
+                        .clock-numbers {
+                            fill: #469826;
+                        }
+                        .clock-numbers-text {
+                            font-size: 1.9em;
+                            fill: #000000;
+                            text-anchor: middle;
+                        }
+                        .clockSVG-arrow-hour {
+                            stroke: #000000;
+                            stroke-width: 10;
+                            stroke-linecap: round;
+                            transform-origin: 250px 250px;
+                        }
+                        .clockSVG-arrow-min {
+                            stroke: #761010;
+                            stroke-width: 6;
+                            stroke-linecap: round;
+                            transform-origin: 250px 250px;
+                        }
+
+                        .clockSVG-arrow-sec {
+                            stroke: #d00a0a;
+                            stroke-width: 4;
+                            stroke-linecap: round;
+                            transform-origin: 250px 250px;
+                        }
+
+                        .clock-electronic {
+                            font-size: 2.5em;
+                        }
+                        .clock-electronic .hour {
+                            fill: #000;
+                        }
+                        .clock-electronic .min {
+                            fill: #000;
+                        }
+                        .clock-electronic .sec {
+                            fill: #000;
+                        }
+
+                        ]]></style>
+                    </defs>
+
+                    <g class="clock-face">
+                        <circle cx=250 cy=250 r=250 />
+
+                        <g class="clock-electronic">
+                            <text class="hour" x=180 y=180>00</text>
+                            <text x=220 y=180 fill=black>:</text>
+                            <text class="min" x=230 y=180>00</text>
+                            <text x=270 y=180 fill=black>:</text>
+                            <text class="sec" x=280 y=180>00</text>
+                        </g>
+
+                        <line class="clockSVG-arrow-hour" x1=250 y1=270 x2=250 y2=90 />
+                        <line class="clockSVG-arrow-min" x1=250 y1=270 x2=250 y2=70 />
+                        <line class="clockSVG-arrow-sec" x1=250 y1=270 x2=250 y2=40 />
+                    </g>
+
+                </svg>
+            </div>
+        </td>
+        <td>
+            <div class="clockCanvas">
+                <input type="button" class="button start" value="Старт">
+                <input type="button" class="button stop" value="Стоп">
+                <span class="info"></span>
+                <canvas class="canvas" width='500' height='500'>Обновите браузер!</canvas>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="clockDom2">
+                <input type="button" class="button start" value="Старт">
+                <input type="button" class="button stop" value="Стоп">
+                <span class="info"></span>
+                <div class="clock-face">
+                    <div class="clock-electronic">
+                        <span class="hour">00</span>:<span class="min">00</span>:<span class="sec">00</span>
+                    </div>
+                    <div class="clock-arrow-hour"></div>
+                    <div class="clock-arrow-min"></div>
+                    <div class="clock-arrow-sec"></div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="clockSVG2">
+                <input type="button" class="button start" value="Старт">
+                <input type="button" class="button stop" value="Стоп">
+                <span class="info"></span>
+                <svg width=500 height=500 style="display: block" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <style><![CDATA[
+                        .clock-face {
+                            fill: #e1bc19;
+                            text-align: center;
+                        }
+                        .clock-numbers {
+                            fill: #469826;
+                        }
+                        .clock-numbers-text {
+                            font-size: 1.9em;
+                            fill: #000000;
+                            text-anchor: middle;
+                        }
+                        .clockSVG-arrow-hour {
+                            stroke: #000000;
+                            stroke-width: 10;
+                            stroke-linecap: round;
+                            transform-origin: 250px 250px;
+                        }
+                        .clockSVG-arrow-min {
+                            stroke: #761010;
+                            stroke-width: 6;
+                            stroke-linecap: round;
+                            transform-origin: 250px 250px;
+                        }
+
+                        .clockSVG-arrow-sec {
+                            stroke: #d00a0a;
+                            stroke-width: 4;
+                            stroke-linecap: round;
+                            transform-origin: 250px 250px;
+                        }
+
+                        .clock-electronic {
+                            font-size: 2.5em;
+                        }
+                        .clock-electronic .hour {
+                            fill: #000;
+                        }
+                        .clock-electronic .min {
+                            fill: #000;
+                        }
+                        .clock-electronic .sec {
+                            fill: #000;
+                        }
+
+                        ]]></style>
+                    </defs>
+
+                    <g class="clock-face">
+                        <circle cx=250 cy=250 r=250 />
+
+                        <g class="clock-electronic">
+                            <text class="hour" x=180 y=180>00</text>
+                            <text x=220 y=180 fill=black>:</text>
+                            <text class="min" x=230 y=180>00</text>
+                            <text x=270 y=180 fill=black>:</text>
+                            <text class="sec" x=280 y=180>00</text>
+                        </g>
+
+                        <line class="clockSVG-arrow-hour" x1=250 y1=270 x2=250 y2=90 />
+                        <line class="clockSVG-arrow-min" x1=250 y1=270 x2=250 y2=70 />
+                        <line class="clockSVG-arrow-sec" x1=250 y1=270 x2=250 y2=40 />
+                    </g>
+
+                </svg>
+            </div>
+        </td>
+        <td>
+            <div class="clockCanvas2">
+                <input type="button" class="button start" value="Старт">
+                <input type="button" class="button stop" value="Стоп">
+                <span class="info"></span>
+                <canvas class="canvas" width='500' height='500'>Обновите браузер!</canvas>
+            </div>
+        </td>
+    </tr>
+</table>
+<script>
+    'use strict';
+    var ClockModelDom = new TClockModel({city:'Нью-Йорк', GMT:-5}); //Нью-Йорк (GMT-5)
+    var ViewDom = new TClockViewDOM();
+    var ControllerDom = new TClockControllerButtons();
+    var DomClock = document.querySelector('.clockDom');
+
+    ClockModelDom.Init(ViewDom);
+    ViewDom.Init(ClockModelDom, DomClock);
+    ControllerDom.Init(ClockModelDom, DomClock);
+
+    ClockModelDom.UpdateView();
+    ClockModelDom.start();
+    //***********************************//
+
+    var ClockModelSVG = new TClockModel(); //Лондон (GMT+0)
+    var ViewSVG = new TClockViewSVG();
+    var ControllerSVG = new TClockControllerButtons();
+    var SVGClock = document.querySelector('.clockSVG');
+
+    ClockModelSVG.Init(ViewSVG);
+    ViewSVG.Init(ClockModelSVG, SVGClock);
+    ControllerSVG.Init(ClockModelSVG, SVGClock);
+
+    ClockModelSVG.UpdateView();
+    ClockModelSVG.start();
+    //***********************************//
+
+    var ClockModelCanvas = new TClockModel({city:'Берлин', GMT:+1}); //Берлин (GMT+1)
+    var ViewCanvas = new TClockViewCanvas();
+    var ControllerCanvas = new TClockControllerButtons();
+    var CanvasClock = document.querySelector('.clockCanvas');
+
+    ClockModelCanvas.Init(ViewCanvas);
+    ViewCanvas.Init(ClockModelCanvas, CanvasClock);
+    ControllerCanvas.Init(ClockModelCanvas, CanvasClock);
+
+    ClockModelCanvas.UpdateView();
+    ClockModelCanvas.start();
+    //***********************************//
+    //***********************************//
+    var ClockModelDom2 = new TClockModel({city:'Минск', GMT:+3}); //Минск (GMT+3)
+    var ViewDom2 = new TClockViewDOM();
+    var ControllerDom2 = new TClockControllerButtons();
+    var DomClock2 = document.querySelector('.clockDom2');
+
+    ClockModelDom2.Init(ViewDom2);
+    ViewDom2.Init(ClockModelDom2, DomClock2);
+    ControllerDom2.Init(ClockModelDom2, DomClock2);
+
+    ClockModelDom2.UpdateView();
+    ClockModelDom2.start();
+    //***********************************//
+
+    var ClockModelSVG2 = new TClockModel({city:'Токио', GMT:+9}); //Токио (GMT+9)
+    var ViewSVG2 = new TClockViewSVG();
+    var ControllerSVG2 = new TClockControllerButtons();
+    var SVGClock2 = document.querySelector('.clockSVG2');
+
+    ClockModelSVG2.Init(ViewSVG2);
+    ViewSVG2.Init(ClockModelSVG2, SVGClock2);
+    ControllerSVG2.Init(ClockModelSVG2, SVGClock2);
+
+    ClockModelSVG2.UpdateView();
+    ClockModelSVG2.start();
+    //***********************************//
+
+    var ClockModelCanvas2 = new TClockModel({city:'Владивосток', GMT:+10}); //Владивосток (GMT+10)
+    var ViewCanvas2 = new TClockViewCanvas();
+    var ControllerCanvas2 = new TClockControllerButtons();
+    var CanvasClock2 = document.querySelector('.clockCanvas2');
+
+    ClockModelCanvas2.Init(ViewCanvas2);
+    ViewCanvas2.Init(ClockModelCanvas2, CanvasClock2);
+    ControllerCanvas2.Init(ClockModelCanvas2, CanvasClock2);
+
+    ClockModelCanvas2.UpdateView();
+    ClockModelCanvas2.start();
+
+</script>
+</body>
+</html>
