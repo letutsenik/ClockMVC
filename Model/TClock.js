@@ -1,11 +1,12 @@
 'use strict';
 function TClockModel (options) {
     var self = this;
+    
     var timerId;
     var hours, minutes, seconds;
     var timeOffset = (options) ? options.GMT : 0;
     var city = (options) ? options.city : 'Лондон';
-    console.log(city);
+
     var ClockView = null;
 
     SetCurrentTime();
@@ -18,7 +19,9 @@ function TClockModel (options) {
     function SetCurrentTime() {
         var now = new Date();
 
-        hours = (now.getUTCHours() + timeOffset >= 24) ? now.getUTCHours() + timeOffset - 24 : now.getUTCHours() + timeOffset;
+        hours = (now.getUTCHours() + timeOffset >= 24) ? now.getUTCHours() + timeOffset - 24 :
+        now.getUTCHours() + timeOffset;
+
         minutes = now.getMinutes();
         seconds = now.getSeconds();
     }
