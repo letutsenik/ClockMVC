@@ -1,7 +1,7 @@
 'use strict';
 function TClockModel (options) {
     var self = this;
-    
+
     var timerId;
     var hours, minutes, seconds;
     var timeOffset = (options) ? options.GMT : 0;
