@@ -1,23 +1,26 @@
-'use strict';
-function TClockControllerButtons() {
-    var ClockModel = null;
-    var ClockDomElem = null; 
+ 'use strict';
+    class TClockControllerButtons {
+        constuctor() {
+            this._ClockModel = null;
+            this._ClockDomElem = null;  
+        }
+    
 
-    this.Init = function(Model,Elem) {
-        ClockModel = Model;
-        ClockDomElem = Elem;
-        
-        var StartButton = ClockDomElem.querySelector('.start');
+    Init (Model,Elem) {
+        this._ClockModel = Model;
+        this._ClockDomElem = Elem;
+
+        const StartButton = this._ClockDomElem.querySelector('.start');
         StartButton.addEventListener('click',this.Start);
-        var StopButton = ClockDomElem.querySelector('.stop');
+        const StopButton = this._ClockDomElem.querySelector('.stop');
         StopButton.addEventListener('click',this.Stop);
     };
 
-    this.Start = function() {
-        ClockModel.start();
+    Start () {
+        this._ClockModel.start();
     };
 
-    this.Stop = function() {
-        ClockModel.stop();
+    Stop () {
+        this._ClockModel.stop();
     }
 }
