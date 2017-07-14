@@ -215,10 +215,10 @@
 </table>
 <script>
     'use strict';
-    var ClockModelDom = new TClockModel({city:'Нью-Йорк', GMT:-5}); //Нью-Йорк (GMT-5)
-    var ViewDom = new TClockViewDOM();
-    var ControllerDom = new TClockControllerButtons();
-    var DomClock = document.querySelector('.clockDom');
+    const ClockModelDom = new TClockModel({city:'Нью-Йорк', GMT:-5}); //Нью-Йорк (GMT-5)
+    const ViewDom = new TClockViewDOM();
+    const ControllerDom = new TClockControllerButtons();
+    const DomClock = document.querySelector('.clockDom');
 
     ClockModelDom.Init(ViewDom);
     ViewDom.Init(ClockModelDom, DomClock);
@@ -228,10 +228,10 @@
     ClockModelDom.start();
     //***********************************//
 
-    var ClockModelSVG = new TClockModel(); //Лондон (GMT+0)
-    var ViewSVG = new TClockViewSVG();
-    var ControllerSVG = new TClockControllerButtons();
-    var SVGClock = document.querySelector('.clockSVG');
+    const ClockModelSVG = new TClockModel(); //Лондон (GMT+0)
+    const ViewSVG = new TClockViewSVG();
+    const ControllerSVG = new TClockControllerButtons();
+    const SVGClock = document.querySelector('.clockSVG');
 
     ClockModelSVG.Init(ViewSVG);
     ViewSVG.Init(ClockModelSVG, SVGClock);
@@ -241,10 +241,10 @@
     ClockModelSVG.start();
     //***********************************//
 
-    var ClockModelCanvas = new TClockModel({city:'Берлин', GMT:+1}); //Берлин (GMT+1)
-    var ViewCanvas = new TClockViewCanvas();
-    var ControllerCanvas = new TClockControllerButtons();
-    var CanvasClock = document.querySelector('.clockCanvas');
+    const ClockModelCanvas = new TClockModel({city:'Берлин', GMT:+1}); //Берлин (GMT+1)
+    const ViewCanvas = new TClockViewCanvas();
+    const ControllerCanvas = new TClockControllerButtons();
+    const CanvasClock = document.querySelector('.clockCanvas');
 
     ClockModelCanvas.Init(ViewCanvas);
     ViewCanvas.Init(ClockModelCanvas, CanvasClock);
@@ -254,10 +254,10 @@
     ClockModelCanvas.start();
     //***********************************//
     //***********************************//
-    var ClockModelDom2 = new TClockModel({city:'Минск', GMT:+3}); //Минск (GMT+3)
-    var ViewDom2 = new TClockViewDOM();
-    var ControllerDom2 = new TClockControllerButtons();
-    var DomClock2 = document.querySelector('.clockDom2');
+    const ClockModelDom2 = new TClockModel({city:'Минск', GMT:+3}); //Минск (GMT+3)
+    const ViewDom2 = new TClockViewDOM();
+    const ControllerDom2 = new TClockControllerButtons();
+    const DomClock2 = document.querySelector('.clockDom2');
 
     ClockModelDom2.Init(ViewDom2);
     ViewDom2.Init(ClockModelDom2, DomClock2);
@@ -267,10 +267,10 @@
     ClockModelDom2.start();
     //***********************************//
 
-    var ClockModelSVG2 = new TClockModel({city:'Токио', GMT:+9}); //Токио (GMT+9)
-    var ViewSVG2 = new TClockViewSVG();
-    var ControllerSVG2 = new TClockControllerButtons();
-    var SVGClock2 = document.querySelector('.clockSVG2');
+    const ClockModelSVG2 = new TClockModel({city:'Токио', GMT:+9}); //Токио (GMT+9)
+    const ViewSVG2 = new TClockViewSVG();
+    const ControllerSVG2 = new TClockControllerButtons();
+    const SVGClock2 = document.querySelector('.clockSVG2');
 
     ClockModelSVG2.Init(ViewSVG2);
     ViewSVG2.Init(ClockModelSVG2, SVGClock2);
@@ -280,10 +280,10 @@
     ClockModelSVG2.start();
     //***********************************//
 
-    var ClockModelCanvas2 = new TClockModel({city:'Владивосток', GMT:+10}); //Владивосток (GMT+10)
-    var ViewCanvas2 = new TClockViewCanvas();
-    var ControllerCanvas2 = new TClockControllerButtons();
-    var CanvasClock2 = document.querySelector('.clockCanvas2');
+    const ClockModelCanvas2 = new TClockModel({city:'Владивосток', GMT:+10}); //Владивосток (GMT+10)
+    const ViewCanvas2 = new TClockViewCanvas();
+    const ControllerCanvas2 = new TClockControllerButtons();
+    const CanvasClock2 = document.querySelector('.clockCanvas2');
 
     ClockModelCanvas2.Init(ViewCanvas2);
     ViewCanvas2.Init(ClockModelCanvas2, CanvasClock2);
