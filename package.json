@@ -1,0 +1,19 @@
+{
+  "name": "clockmvc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DreamerQ/ClockMVC.git"
+  },
+  "author": "DreamerQ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DreamerQ/ClockMVC/issues"
+  },
+  "homepage": "https://github.com/DreamerQ/ClockMVC#readme"
+}
