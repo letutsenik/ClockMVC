@@ -1,58 +1,59 @@
-'use strict';
-function TClockViewDOM (options) {
-    var ClockModel = null;
-    var ClockDomElem = null; 
-    var clockFace = null;
+class TClockViewDOM {
+    constructor() {
+        this._ClockModel = null;
+        this._ClockDomElem = null;
+        this._clockFace = null;
 
-    var clockInfo = null;
+        this._clockInfo = null;
+    }
 
-    this.Init = function(Model,Elem) {
+    Init(Model,Elem) {
 
-        ClockModel = Model;
-        ClockDomElem = Elem;
+        this._ClockModel = Model;
+        this._ClockDomElem = Elem;
 
-        var info = ClockModel.GetClockInfo();
+        let info = this._ClockModel.GetClockInfo();
 
-        clockFace = ClockDomElem.querySelector('.clock-face');
-        clockInfo = ClockDomElem.querySelector('.info');
+        this._clockFace = this._ClockDomElem.querySelector('.clock-face');
+        this._clockInfo = this._ClockDomElem.querySelector('.info');
 
-        if (info.GMT === 0)clockInfo.innerHTML = info.city + ' ' + '(GMT)';
-        if (info.GMT > 0)clockInfo.innerHTML = info.city + ' ' + '(GMT' + '+' + info.GMT + ')';
-        if (info.GMT < 0)clockInfo.innerHTML = info.city + ' ' + '(GMT' + '-' + -info.GMT + ')';
-        
-        drawNumbers();
+        if (info.GMT === 0) this._clockInfo.innerHTML = info.city + ' ' + '(GMT)';
+        if (info.GMT > 0) this._clockInfo.innerHTML = info.city + ' ' + '(GMT' + '+' + info.GMT + ')';
+        if (info.GMT < 0) this._clockInfo.innerHTML = info.city + ' ' + '(GMT' + '-' + -info.GMT + ')';
+
+        this.drawNumbers();
     };
 
-    this.Update = function () {
-        var now = ClockModel.GetCurrentTime();
+    Update () {
+        let now = this._ClockModel.GetCurrentTime();
 
-        var angles = GetArrowsAngel();
+        let angles = this.GetArrowsAngel();
 
-        ClockDomElem.querySelector('.clock-arrow-sec').style.transform = 'rotate(' + angles.sec + 'rad)';
-        ClockDomElem.querySelector('.clock-arrow-min').style.transform = 'rotate(' + angles.min + 'rad)';
-        ClockDomElem.querySelector('.clock-arrow-hour').style.transform = 'rotate(' + angles.hour + 'rad)';
+        this._ClockDomElem.querySelector('.clock-arrow-sec').style.transform = 'rotate(' + angles.sec + 'rad)';
+        this._ClockDomElem.querySelector('.clock-arrow-min').style.transform = 'rotate(' + angles.min + 'rad)';
+        this._ClockDomElem.querySelector('.clock-arrow-hour').style.transform = 'rotate(' + angles.hour + 'rad)';
 
-        var sec = now.seconds;
+        let sec = now.seconds;
         if (sec < 10 ) sec = '0' + sec;
-        ClockDomElem.querySelector('.clock-electronic .sec').innerHTML = sec;
+        this._ClockDomElem.querySelector('.clock-electronic .sec').innerHTML = sec;
 
-        var min = now.minutes;
+        let min = now.minutes;
         if (min < 10 ) min = '0' + min;
-        ClockDomElem.querySelector('.clock-electronic .min').innerHTML = min;
+        this._ClockDomElem.querySelector('.clock-electronic .min').innerHTML = min;
 
-        var hour = now.hours;
+        let hour = now.hours;
         if (hour < 10 ) hour = '0' + hour;
-        ClockDomElem.querySelector('.clock-electronic .hour').innerHTML = hour;
+        this._ClockDomElem.querySelector('.clock-electronic .hour').innerHTML = hour;
     };
 
-    function GetArrowsAngel() {
-        var angles = {};
-        var now = ClockModel.GetCurrentTime();
+    GetArrowsAngel() {
+        let angles = {};
+        let now = this._ClockModel.GetCurrentTime();
 
-        var secInMinute = 60;
-        var minInHour = 60;
+        const secInMinute = 60;
+        const minInHour = 60;
 
-        var hour = now.hours;
+        let hour = now.hours;
 
         angles['sec'] = now.seconds * 2 * Math.PI / secInMinute;
 
@@ -61,31 +62,31 @@ function TClockViewDOM (options) {
         if (hour >= 12) hour -= 12;
         angles['hour'] = hour * 2 * Math.PI / 12 + ( 2 * Math.PI / 12 * now.minutes / secInMinute);
 
-        return angles; 
-     }
+        return angles;
+    }
 
-    function drawNumbers() {
-        var clockFaceHeight = clockFace.offsetHeight;
-        var clockFaceWidth = clockFace.offsetWidth;
+    drawNumbers() {
+        const clockFaceHeight = this._clockFace.offsetHeight;
+        const clockFaceWidth = this._clockFace.offsetWidth;
 
-        var scaleFactor = 0.125; // Маштабный коэффициент для определения размеров кругов с цифрами
-        var scaleRadiusFactor = 0.4; // Маштабный коэффициент для определения радиуса расположения кругов с цифрами
-        var scaleTextSizeFactor = 0.5; // Маштабный коэффициент для определения размера шрифта в кругах с цифрами
+        const scaleFactor = 0.125; // Маштабный коэффициент для определения размеров кругов с цифрами
+        const scaleRadiusFactor = 0.4; // Маштабный коэффициент для определения радиуса расположения кругов с цифрами
+        const scaleTextSizeFactor = 0.5; // Маштабный коэффициент для определения размера шрифта в кругах с цифрами
 
-        var clockNumHeight = Math.round(clockFaceHeight * scaleFactor);
-        var clockNumWidth = Math.round(clockFaceWidth * scaleFactor);
-        var clockNumRadius = Math.round(clockFaceHeight * scaleRadiusFactor);
-        var angelBetweenNum = 30;
+        const clockNumHeight = Math.round(clockFaceHeight * scaleFactor);
+        const clockNumWidth = Math.round(clockFaceWidth * scaleFactor);
+        const clockNumRadius = Math.round(clockFaceHeight * scaleRadiusFactor);
+        const angelBetweenNum = 30;
 
 
-        clockFace.style.width = clockFaceWidth + 'px';
-        clockFace.style.height = clockFaceHeight + 'px';
+        this._clockFace.style.width = clockFaceWidth + 'px';
+        this._clockFace.style.height = clockFaceHeight + 'px';
 
-        var clockFaceCenterX = clockFace.offsetLeft + clockFace.offsetWidth / 2;
-        var clockFaceCenterY = clockFace.offsetTop + clockFace.offsetHeight / 2;
+        const clockFaceCenterX = this._clockFace.offsetLeft + this._clockFace.offsetWidth / 2;
+        const clockFaceCenterY = this._clockFace.offsetTop + this._clockFace.offsetHeight / 2;
 
-        for (var i = 1; i <= 12; i++) {
-            var clockNumber = document.createElement('span');
+        for (let i = 1; i <= 12; i++) {
+            const clockNumber = document.createElement('span');
 
             clockNumber.classList.add('clock-numbers');
             clockNumber.style.width = clockNumWidth + 'px';
@@ -101,7 +102,7 @@ function TClockViewDOM (options) {
             clockNumber.style.top = Math.round(clockFaceCenterY - clockNumHeight / 2 -
                     clockNumRadius * Math.cos(angelBetweenNum * i / 180 * Math.PI)) + 'px';
 
-            ClockDomElem.appendChild(clockNumber);
+            this._ClockDomElem.appendChild(clockNumber);
         }
 
     }
