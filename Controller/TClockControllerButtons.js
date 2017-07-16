@@ -24,3 +24,5 @@
         this._ClockModel.stop();
     }
 }
+
+export default TClockControllerButtons

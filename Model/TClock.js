@@ -71,3 +71,5 @@ class TClockModel {
     }
 
 }
+
+export default TClockModel
