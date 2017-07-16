@@ -1,77 +1,73 @@
-'use strict';
-function TClockModel (options) {
-    var self = this;
+class TClockModel {
 
-    var timerId;
-    var hours, minutes, seconds;
-    var timeOffset = (options) ? options.GMT : 0;
-    var city = (options) ? options.city : 'Лондон';
+    constructor(options) {
+        this._timerId = null;
+        this._hours = null;
+        this._minutes = null;
+        this._seconds = null;
+        this._timeOffset = (options) ? options.GMT : 0;
+        this._city = (options) ? options.city : 'Лондон';
 
-    var ClockView = null;
+        this._ClockView = null;
 
-    SetCurrentTime();
-
-    function UpdateView() {
-        if ( ClockView )
-            ClockView.Update();
+        this.SetCurrentTime = this.SetCurrentTime.bind(this);
+        this.SetCurrentTime();
     }
 
-    function SetCurrentTime() {
-        var now = new Date();
 
-        hours = (now.getUTCHours() + timeOffset >= 24) ? now.getUTCHours() + timeOffset - 24 :
-        now.getUTCHours() + timeOffset;
-
-        minutes = now.getMinutes();
-        seconds = now.getSeconds();
+    UpdateView() {
+        if ( this._ClockView )
+            this._ClockView.Update();
     }
 
-    function GetCurrentTime() {
-        var currentTime = {};
+    SetCurrentTime() {
+        let now = new Date();
 
-        currentTime['hours'] = hours;
-        currentTime['minutes'] = minutes;
-        currentTime['seconds'] = seconds;
+        this._hours = (now.getUTCHours() + this._timeOffset >= 24) ? now.getUTCHours() + this._timeOffset - 24 :
+            now.getUTCHours() + this._timeOffset;
+
+        this._minutes = now.getMinutes();
+        this._seconds = now.getSeconds();
+    }
+
+    GetCurrentTime() {
+        let currentTime = {};
+
+        currentTime['hours'] = this._hours;
+        currentTime['minutes'] = this._minutes;
+        currentTime['seconds'] = this._seconds;
 
         return currentTime;
     }
-    
-    function GetClockInfo() {
+
+    GetClockInfo() {
         return {
-            GMT: timeOffset,
-            city: city
+            GMT: this._timeOffset,
+            city: this._city
         }
     }
 
-    function Init(View) {
-        ClockView = View;
+    Init(View) {
+        this._ClockView = View;
     }
-    
-    function start() {
-        if (timerId) return;
 
-        var now = new Date();
-        var milliseconds = now.getMilliseconds();
+    start() {
+        if (this._timerId) return;
 
-        setTimeout(function () {
+        let now = new Date();
+        let milliseconds = now.getMilliseconds();
 
-            timerId = setInterval(function () {
-                SetCurrentTime();
-                self.UpdateView();
+        setTimeout( () => {
+            this._timerId = setInterval( () => {
+                this.SetCurrentTime();
+                this.UpdateView();
             }, 1000);
         }, 1000 - milliseconds);
     }
 
-    function stop() {
-        clearInterval(timerId);
-        timerId = null;
+    stop() {
+        clearInterval(this._timerId);
+        this._timerId = null;
     }
-
-    self.Init = Init;
-    self.GetCurrentTime = GetCurrentTime;
-    self.GetClockInfo = GetClockInfo;
-    self.UpdateView = UpdateView;
-    self.start = start;
-    self.stop = stop;
 
 }
