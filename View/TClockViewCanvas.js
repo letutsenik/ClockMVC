@@ -10,7 +10,7 @@ function TClockViewCanvas () {
     var clockFaceRadius = 250;
     var clockFaceCenterX = 250;
     var clockFaceCenterY = 250;
-    
+
     this.Init = function(Model,Elem) {
         ClockModel = Model;
         ClockDomElem = Elem;
