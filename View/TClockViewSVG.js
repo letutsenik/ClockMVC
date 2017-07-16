@@ -110,3 +110,5 @@ class TClockViewSVG {
     }
 }
 
+export default TClockViewSVG
+

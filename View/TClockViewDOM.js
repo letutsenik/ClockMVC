@@ -107,3 +107,5 @@ class TClockViewDOM {
 
     }
 }
+
+export default TClockViewDOM

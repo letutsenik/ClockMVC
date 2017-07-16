@@ -98,7 +98,7 @@ class TClockViewCanvas {
         const secArrowLenght = 230;
         const arrowTail = 20;
 
-        this._Context.lineCap='round';
+        this._Context.lineCap='round';g
 
         this._Context.lineWidth = 9.5;
         this._Context.strokeStyle='#000';
@@ -155,4 +155,6 @@ class TClockViewCanvas {
         return angles;
     }
 }
+
+export default TClockViewCanvas
 
