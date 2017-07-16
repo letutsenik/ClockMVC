@@ -1,59 +1,60 @@
-'use strict';
-function TClockViewSVG () {
-    var ClockModel = null;
-    var ClockDomElem = null; 
-    var clockFace = null;
-    var clockSVG = null;
+class TClockViewSVG {
+    constructor() {
+        this._ClockModel = null;
+        this._ClockDomElem = null;
+        this._clockFace = null;
+        this._clockSVG = null;
 
-    var clockInfo = null;
+        this._clockInfo = null;
+    }
 
-    this.Init = function(Model,Elem) {
-        ClockModel = Model;
-        ClockDomElem = Elem;
+    Init (Model,Elem) {
+        this._ClockModel = Model;
+        this._ClockDomElem = Elem;
 
-        var info = ClockModel.GetClockInfo();
+        let info = this._ClockModel.GetClockInfo();
 
-        clockFace = ClockDomElem.querySelector('.clock-face');
-        clockSVG = ClockDomElem.getElementsByTagName('svg')[0];
-        clockInfo = ClockDomElem.querySelector('.info');
+        this._clockFace = this._ClockDomElem.querySelector('.clock-face');
+        this._clockSVG = this._ClockDomElem.getElementsByTagName('svg')[0];
+        this._clockInfo = this._ClockDomElem.querySelector('.info');
         
-        if (info.GMT === 0)clockInfo.innerHTML = info.city + ' ' + '(GMT)';
-        if (info.GMT > 0)clockInfo.innerHTML = info.city + ' ' + '(GMT' + '+' + info.GMT + ')';
-        if (info.GMT < 0)clockInfo.innerHTML = info.city + ' ' + '(GMT' + '-' + -info.GMT + ')';
+        if (info.GMT === 0) this._clockInfo.innerHTML = info.city + ' ' + '(GMT)';
+        if (info.GMT > 0) this._clockInfo.innerHTML = info.city + ' ' + '(GMT' + '+' + info.GMT + ')';
+        if (info.GMT < 0) this._clockInfo.innerHTML = info.city + ' ' + '(GMT' + '-' + -info.GMT + ')';
 
-        drawNumbers();
+        this.drawNumbers();
     };
 
-    this.Update = function () {
-        var now = ClockModel.GetCurrentTime();
+    Update () {
+        let now = this._ClockModel.GetCurrentTime();
 
-        var angles = GetArrowsAngel();
+        let angles = this.GetArrowsAngel();
 
-        ClockDomElem.querySelector('.clockSVG-arrow-sec').style.transform = 'rotate(' + angles.sec + 'rad)';
-        ClockDomElem.querySelector('.clockSVG-arrow-min').style.transform = 'rotate(' + angles.min + 'rad)';
-        ClockDomElem.querySelector('.clockSVG-arrow-hour').style.transform = 'rotate(' + angles.hour + 'rad)';
+        this._ClockDomElem.querySelector('.clockSVG-arrow-sec').style.transform = 'rotate(' + angles.sec + 'rad)';
+        this._ClockDomElem.querySelector('.clockSVG-arrow-min').style.transform = 'rotate(' + angles.min + 'rad)';
+        this._ClockDomElem.querySelector('.clockSVG-arrow-hour').style.transform = 'rotate(' + angles.hour + 'rad)';
 
-        var sec = now.seconds;
+        let sec = now.seconds;
         if (sec < 10 ) sec = '0' + sec;
-        ClockDomElem.querySelector('.clock-electronic .sec').innerHTML = sec;
+        this._ClockDomElem.querySelector('.clock-electronic .sec').innerHTML = sec;
 
-        var min = now.minutes;
+        let min = now.minutes;
         if (min < 10 ) min = '0' + min;
-        ClockDomElem.querySelector('.clock-electronic .min').innerHTML = min;
+        this._ClockDomElem.querySelector('.clock-electronic .min').innerHTML = min;
 
-        var hour = now.hours;
+        let hour = now.hours;
         if (hour < 10 ) hour = '0' + hour;
-        ClockDomElem.querySelector('.clock-electronic .hour').innerHTML = hour;
+        this._ClockDomElem.querySelector('.clock-electronic .hour').innerHTML = hour;
     };
 
-    function GetArrowsAngel() {
-        var angles = {};
-        var now = ClockModel.GetCurrentTime();
+    GetArrowsAngel() {
+        let angles = {};
+        let now = this._ClockModel.GetCurrentTime();
 
-        var secInMinute = 60;
-        var minInHour = 60;
+        const secInMinute = 60;
+        const minInHour = 60;
 
-        var hour = now.hours;
+        let hour = now.hours;
 
         angles['sec'] = now.seconds * 2 * Math.PI / secInMinute;
 
@@ -66,25 +67,25 @@ function TClockViewSVG () {
     }
 
 
-    function drawNumbers() {
-        var clockFaceCircle = clockFace.getElementsByTagName('circle')[0];
-        var clockFaceRadius = +clockFaceCircle.getAttribute('r');
+    drawNumbers() {
+        const clockFaceCircle = this._clockFace.getElementsByTagName('circle')[0];
+        const clockFaceRadius = +clockFaceCircle.getAttribute('r');
 
 
-        var scaleFactor = 0.125; // Маштабный коэффициент для определения размеров кругов с цифрами
-        var scaleRadiusFactor = 0.8; // Маштабный коэффициент для определения радиуса расположения кругов с цифрами
-        var scaleTextOffsetFactor = 0.3; // Маштабный коэффициент для определения размера шрифта в кругах с цифрами
+        const scaleFactor = 0.125; // Маштабный коэффициент для определения размеров кругов с цифрами
+        const scaleRadiusFactor = 0.8; // Маштабный коэффициент для определения радиуса расположения кругов с цифрами
+        const scaleTextOffsetFactor = 0.3; // Маштабный коэффициент для определения размера шрифта в кругах с цифрами
 
-        var clockNumRadius = Math.round(clockFaceRadius * scaleFactor);
-        var clockNumR = Math.round(clockFaceRadius * scaleRadiusFactor);
-        var textOffset = Math.round(clockNumRadius * scaleTextOffsetFactor);
-        var angelBetweenNum = 30;
+        const clockNumRadius = Math.round(clockFaceRadius * scaleFactor);
+        const clockNumR = Math.round(clockFaceRadius * scaleRadiusFactor);
+        const textOffset = Math.round(clockNumRadius * scaleTextOffsetFactor);
+        const angelBetweenNum = 30;
 
-        var clockFaceCenterX = +clockFaceCircle.getAttribute('r');
-        var clockFaceCenterY = +clockFaceCircle.getAttribute('r');
+        const clockFaceCenterX = +clockFaceCircle.getAttribute('r');
+        const clockFaceCenterY = +clockFaceCircle.getAttribute('r');
 
-        for (var i = 1; i <= 12; i++) {
-            var clockNumber = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        for (let i = 1; i <= 12; i++) {
+            const clockNumber = document.createElementNS('http://www.w3.org/2000/svg','circle');
             clockNumber.classList.add('clock-numbers');
             clockNumber.setAttribute('r', clockNumRadius);
 
@@ -92,9 +93,9 @@ function TClockViewSVG () {
                 clockNumR * Math.sin(30 * i / 180 * Math.PI)) );
             clockNumber.setAttribute('cy', Math.round(clockFaceCenterY -
                 clockNumR * Math.cos(30 * i / 180 * Math.PI)) );
-            clockFace.insertBefore(clockNumber, clockFace.querySelector('.clockSVG-arrow-hour'));
+            this._clockFace.insertBefore(clockNumber, this._clockFace.querySelector('.clockSVG-arrow-hour'));
 
-            var clockNumberText = document.createElementNS('http://www.w3.org/2000/svg','text');
+            const clockNumberText = document.createElementNS('http://www.w3.org/2000/svg','text');
             clockNumberText.classList.add('clock-numbers-text');
             clockNumberText.innerHTML = i;
 
@@ -103,8 +104,9 @@ function TClockViewSVG () {
             clockNumberText.setAttribute('y', Math.round(clockFaceCenterY -
                     clockNumR * Math.cos(angelBetweenNum * (i) / 180 * Math.PI)) + textOffset );
 
-            clockFace.appendChild(clockNumberText);
+            this._clockFace.appendChild(clockNumberText);
         }
 
     }
 }
+
