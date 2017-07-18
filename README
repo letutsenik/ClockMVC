@@ -1,4 +1,1 @@
-This is README file
-Add some new strings to README file
-Hello from Yan!!!
-Hello Yan! How are you?
+This is simple clock implementation in different kinds of view: DOM, SVG and Canvas
