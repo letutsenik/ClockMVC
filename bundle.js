@@ -167,9 +167,11 @@ ClockModelCanvas2.start();
 
 
 class TClockControllerButtons {
-    constuctor() {
+    constructor() {
         this._ClockModel = null;
         this._ClockDomElem = null;
+        this.Start = this.Start.bind(this);
+        this.Stop = this.Stop.bind(this);
     }
 
     Init(Model, Elem) {
